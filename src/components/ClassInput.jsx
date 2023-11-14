@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Count from "./Count";
+import EditButton from "./EditButton";
 
 class ClassInput extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class ClassInput extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleEditClick = this.handleEditClick.bind(this);
   }
 
   handleInputChange(e) {
@@ -45,6 +47,15 @@ class ClassInput extends Component {
     // console.log(newArrayToRender);
   }
 
+  handleEditClick(e) {
+    console.log(e.target.textContent);
+    if (e.target.textContent == "Edit") {
+      e.target.textContent = "Resubmit";
+    } else {
+      e.target.textContent = "Edit";
+    }
+  }
+
   render() {
     return (
       <section>
@@ -65,6 +76,7 @@ class ClassInput extends Component {
             <li key={todo}>
               {todo}
               <button onClick={this.handleDelete}>Delete</button>
+              <EditButton handleClick={this.handleEditClick} name={"Edit"} />
             </li>
           ))}
         </ul>
