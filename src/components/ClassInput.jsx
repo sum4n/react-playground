@@ -30,7 +30,7 @@ class ClassInput extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.setState((state) => ({
-      todos: state.todos.concat(state.inputVal),
+      todos: state.todos.concat({ taskName: state.inputVal, editing: false }),
       inputVal: "",
     }));
   }
