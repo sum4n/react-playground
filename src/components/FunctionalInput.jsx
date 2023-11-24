@@ -45,12 +45,35 @@ const FunctionalInput = ({ name }) => {
           return todo;
         }
       });
-      console.log(newArray);
+      // console.log(newArray);
 
-      //
+      // rerender new todos
       setTodos(newArray);
     } else {
+      // change Resubmit button text to 'Edit'
       e.target.textContent = "Edit";
+      // Find the item to resubmit with id because it will not change during input
+      let itemToResubmit = e.target.parentNode.firstChild.id;
+      // console.log(itemToResubmit);
+
+      // create new array with modified task
+      let newArray = todos.map((todo) => {
+        // we compare the taskName with itemToResubmit found through ID.
+        // if we used firstChild.value to find taskName, it would not work because
+        // input text will differ from taskName. So we set ID same as taskName in the <input> jsx.
+        if (todo.taskName == itemToResubmit) {
+          return {
+            taskName: e.target.parentNode.firstChild.value,
+            editing: false,
+          };
+        } else {
+          return todo;
+        }
+      });
+
+      // rerender edited todos
+      setTodos(newArray);
+      // console.log(todos);
     }
   };
 
@@ -73,9 +96,10 @@ const FunctionalInput = ({ name }) => {
           <li key={todo.taskName}>
             {todo.editing ? (
               <input
+                // needs id to identify task when editing
+                id={todo.taskName}
                 type="text"
-                value={todo.taskName}
-                onChange={handleInputChange}
+                defaultValue={todo.taskName}
               />
             ) : (
               todo.taskName
