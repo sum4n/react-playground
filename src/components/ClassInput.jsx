@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Count from "./Count";
-import EditButton from "./EditButton";
 
 class ClassInput extends Component {
   constructor(props) {
@@ -76,7 +75,7 @@ class ClassInput extends Component {
             <li key={todo}>
               {todo}
               <button onClick={this.handleDelete}>Delete</button>
-              <EditButton handleClick={this.handleEditClick} name={"Edit"} />
+              <button onClick={this.handleEditClick}>Edit</button>
             </li>
           ))}
         </ul>

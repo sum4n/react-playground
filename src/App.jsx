@@ -17,7 +17,7 @@ function App() {
     <>
       <FunctionalInput name={"Function TODO"} />
       <div className="divider"></div>
-      {/* <ClassInput name={"Class TODO"} /> */}
+      <ClassInput name={"Class TODO"} />
     </>
   );
 }
