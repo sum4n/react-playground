@@ -40,7 +40,7 @@ class ClassInput extends Component {
     // console.log(itemToDelete);
 
     let newArrayToRender = this.state.todos.filter((todo) => {
-      return todo != itemToDelete;
+      return todo.taskName != itemToDelete;
     });
 
     this.setState((state) => ({
