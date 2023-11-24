@@ -1,3 +1,5 @@
+// EditButton class component for FuntionalInput.jsx and ClassInput.jsx
+// Did not need it in the end.
 import React, { Component } from "react";
 
 class EditButton extends Component {

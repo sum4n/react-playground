@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import Count from "./Count";
-import EditButton from "./EditButton";
 
 const FunctionalInput = ({ name }) => {
-  const [todos, setTodos] = useState(["Task1", "Task2", "Task3"]);
+  const [todos, setTodos] = useState([
+    { taskName: "Task1", editing: false },
+    { taskName: "Task2", editing: false },
+    { taskName: "Task3", editing: false },
+  ]);
   const [inputVal, setInputVal] = useState("");
 
   const handleInputChange = (e) => {
@@ -12,7 +15,7 @@ const FunctionalInput = ({ name }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setTodos((todo) => [...todo, inputVal]);
+    setTodos((todo) => [...todo, { taskName: inputVal, editing: false }]);
     setInputVal("");
   };
 
@@ -21,7 +24,7 @@ const FunctionalInput = ({ name }) => {
     let itemToDelete = e.target.parentNode.firstChild.textContent;
     // get a new array by filtering out the arrayItem
     let newArrayToRender = todos.filter((todo) => {
-      return todo != itemToDelete;
+      return todo.taskName != itemToDelete;
     });
     // console.log(newArrayToRender);
     // set the newArrayToRender as the todos list array.
@@ -29,9 +32,23 @@ const FunctionalInput = ({ name }) => {
   };
 
   const handleEdit = (e) => {
-    console.log(e.target.textContent);
     if (e.target.textContent == "Edit") {
       e.target.textContent = "Resubmit";
+      // changing target's editing value to true
+      let itemToEdit = e.target.parentNode.firstChild.textContent;
+
+      // create new array where the target's editing value will be true
+      let newArray = todos.map((todo) => {
+        if (todo.taskName == itemToEdit) {
+          return { taskName: todo.taskName, editing: true };
+        } else {
+          return todo;
+        }
+      });
+      console.log(newArray);
+
+      //
+      setTodos(newArray);
     } else {
       e.target.textContent = "Edit";
     }
@@ -53,9 +70,18 @@ const FunctionalInput = ({ name }) => {
       <h4>All the tasks!</h4>
       <ul>
         {todos.map((todo) => (
-          <li key={todo}>
-            {todo} <button onClick={handleDelete}>Delete</button>
-            <EditButton handleClick={handleEdit} name={"Edit"} />
+          <li key={todo.taskName}>
+            {todo.editing ? (
+              <input
+                type="text"
+                value={todo.taskName}
+                onChange={handleInputChange}
+              />
+            ) : (
+              todo.taskName
+            )}
+            <button onClick={handleDelete}>Delete</button>
+            <button onClick={handleEdit}>Edit</button>
           </li>
         ))}
       </ul>
