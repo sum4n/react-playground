@@ -6,7 +6,11 @@ class ClassInput extends Component {
     super(props);
 
     this.state = {
-      todos: ["task1", "task2", "task3"],
+      todos: [
+        { taskName: "Task1", editing: false },
+        { taskName: "Task2", editing: false },
+        { taskName: "Task3", editing: false },
+      ],
       inputVal: "",
     };
 
@@ -72,8 +76,17 @@ class ClassInput extends Component {
         <h4>All the tasks!</h4>
         <ul>
           {this.state.todos.map((todo) => (
-            <li key={todo}>
-              {todo}
+            <li key={todo.taskName}>
+              {todo.editing ? (
+                <input
+                  // needs id to identify task when editing
+                  id={todo.taskName}
+                  type="text"
+                  defaultValue={todo.taskName}
+                />
+              ) : (
+                todo.taskName
+              )}
               <button onClick={this.handleDelete}>Delete</button>
               <button onClick={this.handleEditClick}>Edit</button>
             </li>
