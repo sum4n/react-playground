@@ -5,7 +5,6 @@ import EditButton from "./EditButton";
 const FunctionalInput = ({ name }) => {
   const [todos, setTodos] = useState(["Task1", "Task2", "Task3"]);
   const [inputVal, setInputVal] = useState("");
-  const [buttonVal, setButtonVal] = useState("Edit");
 
   const handleInputChange = (e) => {
     setInputVal(e.target.value);
