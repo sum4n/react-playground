@@ -21,7 +21,8 @@ const FunctionalInput = ({ name }) => {
 
   const handleDelete = (e) => {
     // get the task name array item which is li's firstChild
-    let itemToDelete = e.target.parentNode.firstChild.textContent;
+    let itemToDelete = e.target.parentNode.id;
+    console.log(itemToDelete);
     // get a new array by filtering out the arrayItem
     let newArrayToRender = todos.filter((todo) => {
       return todo.taskName != itemToDelete;
@@ -35,7 +36,7 @@ const FunctionalInput = ({ name }) => {
     if (e.target.textContent == "Edit") {
       e.target.textContent = "Resubmit";
       // changing target's editing value to true
-      let itemToEdit = e.target.parentNode.firstChild.textContent;
+      let itemToEdit = e.target.parentNode.id;
 
       // create new array where the target's editing value will be true
       let newArray = todos.map((todo) => {
@@ -53,7 +54,7 @@ const FunctionalInput = ({ name }) => {
       // change Resubmit button text to 'Edit'
       e.target.textContent = "Edit";
       // Find the item to resubmit with id because it will not change during input
-      let itemToResubmit = e.target.parentNode.firstChild.id;
+      let itemToResubmit = e.target.parentNode.id;
       // console.log(itemToResubmit);
 
       // create new array with modified task
@@ -93,14 +94,10 @@ const FunctionalInput = ({ name }) => {
       <h4>All the tasks!</h4>
       <ul>
         {todos.map((todo) => (
-          <li key={todo.taskName}>
+          // needs id to identify task when editing
+          <li key={todo.taskName} id={todo.taskName}>
             {todo.editing ? (
-              <input
-                // needs id to identify task when editing
-                id={todo.taskName}
-                type="text"
-                defaultValue={todo.taskName}
-              />
+              <input type="text" defaultValue={todo.taskName} />
             ) : (
               todo.taskName
             )}
