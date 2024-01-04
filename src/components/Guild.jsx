@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 
-const Popeye = () => {
+const Guild = () => {
   return (
     <>
-      <p>Hi! I'm Popeye. I love to eat Spinach!</p>
+      <h1>This is guild page</h1>
       <Link to="/">Click here to go back</Link>
     </>
   );
 };
 
-export default Popeye;
+export default Guild;

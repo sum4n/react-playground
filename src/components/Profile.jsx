@@ -1,8 +1,7 @@
-// import { Outlet } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import DefaultProfile from "./DefaultProfile";
-import Spinach from "./Spinach";
 import Popeye from "./Popeye";
+import Spinach from "./Spinach";
 
 const Profile = () => {
   const { name } = useParams();
