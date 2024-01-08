@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-const Guild = () => {
+// this is a custom hook to fetch data
+const useImageURL = () => {
   const [imageURL, setImageURL] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -15,10 +16,15 @@ const Guild = () => {
         return response.json();
       })
       .then((response) => setImageURL(response[0].url))
-      .catch((error) => console.error(error))
+      .catch((error) => setError(error))
       .finally(() => setLoading(false));
   }, []);
 
+  return { imageURL, error, loading };
+};
+
+const Guild = () => {
+  const { imageURL, error, loading } = useImageURL();
   return (
     <>
       <h1>This is guild page</h1>
